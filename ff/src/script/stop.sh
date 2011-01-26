@@ -1,6 +1,6 @@
 #!/bin/sh
 
-APPLICATION=xfresh-server
+APPLICATION=ff-server
 
 kill -9 `cat $APPLICATION.pid`
 rm $APPLICATION.pid

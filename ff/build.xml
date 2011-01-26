@@ -1,4 +1,5 @@
-<project name="xfresh-server" default="build">
+<!--suppress AntMissingPropertiesFileInspection -->
+<project name="ff-server" default="build">
     <target name="init">
         <property file="local.build.properties"/>
         <property file="build.properties"/>
