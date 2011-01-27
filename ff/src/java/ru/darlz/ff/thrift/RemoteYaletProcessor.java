@@ -13,6 +13,8 @@ import org.apache.thrift.meta_data.StructMetaData;
 import org.apache.thrift.protocol.*;
 import org.apache.thrift.transport.TMemoryInputTransport;
 import org.apache.thrift.transport.TNonblockingTransport;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
@@ -163,7 +165,8 @@ public class RemoteYaletProcessor {
     }
 
     public static class Processor implements TProcessor {
-        //private static final Logger LOGGER = LoggerFactory.getLogger(Processor.class.getName());
+        private static final Logger LOGGER = LoggerFactory.getLogger(Processor.class.getName());
+
         public Processor(Iface iface) {
             iface_ = iface;
             processMap_.put("process", new process());

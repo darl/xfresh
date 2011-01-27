@@ -23,6 +23,7 @@ public class RemoteInternalResponse implements TBase<RemoteInternalResponse, Rem
     private static final TField DATA_FIELD_DESC = new TField("data", TType.LIST, (short) 4);
     private static final TField ERRORS_FIELD_DESC = new TField("errors", TType.LIST, (short) 5);
     private static final TField ATTRIBUTES_FIELD_DESC = new TField("attributes", TType.MAP, (short) 6);
+    private static final TField HEADERS_FIELD_DESC = new TField("headers", TType.MAP, (short) 7);
 
     public String redirectTo;
     public Map<String, String> cookies;
@@ -30,6 +31,7 @@ public class RemoteInternalResponse implements TBase<RemoteInternalResponse, Rem
     public List<String> data;
     public List<String> errors;
     public Map<String, String> attributes;
+    public Map<String, String> headers;
 
     /**
      * The set of fields this struct contains, along with convenience methods for finding and manipulating them.
@@ -40,7 +42,8 @@ public class RemoteInternalResponse implements TBase<RemoteInternalResponse, Rem
         HTTP_STATUS((short) 3, "httpStatus"),
         DATA((short) 4, "data"),
         ERRORS((short) 5, "errors"),
-        ATTRIBUTES((short) 6, "attributes");
+        ATTRIBUTES((short) 6, "attributes"),
+        HEADERS((short) 7, "headers");
 
         private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -67,6 +70,8 @@ public class RemoteInternalResponse implements TBase<RemoteInternalResponse, Rem
                     return ERRORS;
                 case 6: // ATTRIBUTES
                     return ATTRIBUTES;
+                case 7: // HEADERS
+                    return HEADERS;
                 default:
                     return null;
             }
@@ -132,6 +137,10 @@ public class RemoteInternalResponse implements TBase<RemoteInternalResponse, Rem
                 new MapMetaData(TType.MAP,
                         new FieldValueMetaData(TType.STRING),
                         new FieldValueMetaData(TType.STRING))));
+        tmpMap.put(_Fields.HEADERS, new FieldMetaData("headers", TFieldRequirementType.DEFAULT,
+                new MapMetaData(TType.MAP,
+                        new FieldValueMetaData(TType.STRING),
+                        new FieldValueMetaData(TType.STRING))));
         metaDataMap = Collections.unmodifiableMap(tmpMap);
         FieldMetaData.addStructMetaDataMap(RemoteInternalResponse.class, metaDataMap);
     }
@@ -145,7 +154,8 @@ public class RemoteInternalResponse implements TBase<RemoteInternalResponse, Rem
             int httpStatus,
             List<String> data,
             List<String> errors,
-            Map<String, String> attributes) {
+            Map<String, String> attributes,
+            Map<String, String> headers) {
         this();
         this.redirectTo = redirectTo;
         this.cookies = cookies;
@@ -154,6 +164,7 @@ public class RemoteInternalResponse implements TBase<RemoteInternalResponse, Rem
         this.data = data;
         this.errors = errors;
         this.attributes = attributes;
+        this.headers = headers;
     }
 
     /**
@@ -210,6 +221,21 @@ public class RemoteInternalResponse implements TBase<RemoteInternalResponse, Rem
             }
             this.attributes = __this__attributes;
         }
+        if (other.isSetHeaders()) {
+            Map<String, String> __this__headers = new HashMap<String, String>();
+            for (Map.Entry<String, String> other_element : other.headers.entrySet()) {
+
+                String other_element_key = other_element.getKey();
+                String other_element_value = other_element.getValue();
+
+                String __this__headers_copy_key = other_element_key;
+
+                String __this__headers_copy_value = other_element_value;
+
+                __this__headers.put(__this__headers_copy_key, __this__headers_copy_value);
+            }
+            this.headers = __this__headers;
+        }
     }
 
     public RemoteInternalResponse deepCopy() {
@@ -225,6 +251,7 @@ public class RemoteInternalResponse implements TBase<RemoteInternalResponse, Rem
         this.data = null;
         this.errors = null;
         this.attributes = null;
+        this.headers = null;
     }
 
     public String getRedirectTo() {
@@ -434,6 +461,43 @@ public class RemoteInternalResponse implements TBase<RemoteInternalResponse, Rem
         }
     }
 
+    public int getHeadersSize() {
+        return (this.headers == null) ? 0 : this.headers.size();
+    }
+
+    public void putToHeaders(String key, String val) {
+        if (this.headers == null) {
+            this.headers = new HashMap<String, String>();
+        }
+        this.headers.put(key, val);
+    }
+
+    public Map<String, String> getHeaders() {
+        return this.headers;
+    }
+
+    public RemoteInternalResponse setHeaders(Map<String, String> headers) {
+        this.headers = headers;
+        return this;
+    }
+
+    public void unsetHeaders() {
+        this.headers = null;
+    }
+
+    /**
+     * Returns true if field headers is set (has been asigned a value) and false otherwise
+     */
+    public boolean isSetHeaders() {
+        return this.headers != null;
+    }
+
+    public void setHeadersIsSet(boolean value) {
+        if (!value) {
+            this.headers = null;
+        }
+    }
+
     public void setFieldValue(_Fields field, Object value) {
         switch (field) {
             case REDIRECT_TO:
@@ -484,6 +548,14 @@ public class RemoteInternalResponse implements TBase<RemoteInternalResponse, Rem
                 }
                 break;
 
+            case HEADERS:
+                if (value == null) {
+                    unsetHeaders();
+                } else {
+                    setHeaders((Map<String, String>) value);
+                }
+                break;
+
         }
     }
 
@@ -506,6 +578,9 @@ public class RemoteInternalResponse implements TBase<RemoteInternalResponse, Rem
 
             case ATTRIBUTES:
                 return getAttributes();
+
+            case HEADERS:
+                return getHeaders();
 
         }
         throw new IllegalStateException();
@@ -532,6 +607,8 @@ public class RemoteInternalResponse implements TBase<RemoteInternalResponse, Rem
                 return isSetErrors();
             case ATTRIBUTES:
                 return isSetAttributes();
+            case HEADERS:
+                return isSetHeaders();
         }
         throw new IllegalStateException();
     }
@@ -600,6 +677,15 @@ public class RemoteInternalResponse implements TBase<RemoteInternalResponse, Rem
             if (!(this_present_attributes && that_present_attributes))
                 return false;
             if (!this.attributes.equals(that.attributes))
+                return false;
+        }
+
+        boolean this_present_headers = true && this.isSetHeaders();
+        boolean that_present_headers = true && that.isSetHeaders();
+        if (this_present_headers || that_present_headers) {
+            if (!(this_present_headers && that_present_headers))
+                return false;
+            if (!this.headers.equals(that.headers))
                 return false;
         }
 
@@ -675,6 +761,16 @@ public class RemoteInternalResponse implements TBase<RemoteInternalResponse, Rem
         }
         if (isSetAttributes()) {
             lastComparison = TBaseHelper.compareTo(this.attributes, typedOther.attributes);
+            if (lastComparison != 0) {
+                return lastComparison;
+            }
+        }
+        lastComparison = Boolean.valueOf(isSetHeaders()).compareTo(typedOther.isSetHeaders());
+        if (lastComparison != 0) {
+            return lastComparison;
+        }
+        if (isSetHeaders()) {
+            lastComparison = TBaseHelper.compareTo(this.headers, typedOther.headers);
             if (lastComparison != 0) {
                 return lastComparison;
             }
@@ -778,6 +874,24 @@ public class RemoteInternalResponse implements TBase<RemoteInternalResponse, Rem
                         TProtocolUtil.skip(iprot, field.type);
                     }
                     break;
+                case 7: // HEADERS
+                    if (field.type == TType.MAP) {
+                        {
+                            TMap _map33 = iprot.readMapBegin();
+                            this.headers = new HashMap<String, String>(2 * _map33.size);
+                            for (int _i34 = 0; _i34 < _map33.size; ++_i34) {
+                                String _key35;
+                                String _val36;
+                                _key35 = iprot.readString();
+                                _val36 = iprot.readString();
+                                this.headers.put(_key35, _val36);
+                            }
+                            iprot.readMapEnd();
+                        }
+                    } else {
+                        TProtocolUtil.skip(iprot, field.type);
+                    }
+                    break;
                 default:
                     TProtocolUtil.skip(iprot, field.type);
             }
@@ -802,9 +916,9 @@ public class RemoteInternalResponse implements TBase<RemoteInternalResponse, Rem
             oprot.writeFieldBegin(COOKIES_FIELD_DESC);
             {
                 oprot.writeMapBegin(new TMap(TType.STRING, TType.STRING, this.cookies.size()));
-                for (Map.Entry<String, String> _iter33 : this.cookies.entrySet()) {
-                    oprot.writeString(_iter33.getKey());
-                    oprot.writeString(_iter33.getValue());
+                for (Map.Entry<String, String> _iter37 : this.cookies.entrySet()) {
+                    oprot.writeString(_iter37.getKey());
+                    oprot.writeString(_iter37.getValue());
                 }
                 oprot.writeMapEnd();
             }
@@ -817,8 +931,8 @@ public class RemoteInternalResponse implements TBase<RemoteInternalResponse, Rem
             oprot.writeFieldBegin(DATA_FIELD_DESC);
             {
                 oprot.writeListBegin(new TList(TType.STRING, this.data.size()));
-                for (String _iter34 : this.data) {
-                    oprot.writeString(_iter34);
+                for (String _iter38 : this.data) {
+                    oprot.writeString(_iter38);
                 }
                 oprot.writeListEnd();
             }
@@ -828,8 +942,8 @@ public class RemoteInternalResponse implements TBase<RemoteInternalResponse, Rem
             oprot.writeFieldBegin(ERRORS_FIELD_DESC);
             {
                 oprot.writeListBegin(new TList(TType.STRING, this.errors.size()));
-                for (String _iter35 : this.errors) {
-                    oprot.writeString(_iter35);
+                for (String _iter39 : this.errors) {
+                    oprot.writeString(_iter39);
                 }
                 oprot.writeListEnd();
             }
@@ -839,9 +953,21 @@ public class RemoteInternalResponse implements TBase<RemoteInternalResponse, Rem
             oprot.writeFieldBegin(ATTRIBUTES_FIELD_DESC);
             {
                 oprot.writeMapBegin(new TMap(TType.STRING, TType.STRING, this.attributes.size()));
-                for (Map.Entry<String, String> _iter36 : this.attributes.entrySet()) {
-                    oprot.writeString(_iter36.getKey());
-                    oprot.writeString(_iter36.getValue());
+                for (Map.Entry<String, String> _iter40 : this.attributes.entrySet()) {
+                    oprot.writeString(_iter40.getKey());
+                    oprot.writeString(_iter40.getValue());
+                }
+                oprot.writeMapEnd();
+            }
+            oprot.writeFieldEnd();
+        }
+        if (this.headers != null) {
+            oprot.writeFieldBegin(HEADERS_FIELD_DESC);
+            {
+                oprot.writeMapBegin(new TMap(TType.STRING, TType.STRING, this.headers.size()));
+                for (Map.Entry<String, String> _iter41 : this.headers.entrySet()) {
+                    oprot.writeString(_iter41.getKey());
+                    oprot.writeString(_iter41.getValue());
                 }
                 oprot.writeMapEnd();
             }
@@ -897,6 +1023,14 @@ public class RemoteInternalResponse implements TBase<RemoteInternalResponse, Rem
             sb.append("null");
         } else {
             sb.append(this.attributes);
+        }
+        first = false;
+        if (!first) sb.append(", ");
+        sb.append("headers:");
+        if (this.headers == null) {
+            sb.append("null");
+        } else {
+            sb.append(this.headers);
         }
         first = false;
         sb.append(")");

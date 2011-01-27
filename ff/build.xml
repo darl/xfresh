@@ -71,6 +71,7 @@
         <copy todir="${build.lib.dir}" flatten="true">
             <fileset refid="core-lib"/>
             <fileset refid="xfresh-core"/>
+            <fileset refid="ff-lib"/>
         </copy>
     </target>
 </project>

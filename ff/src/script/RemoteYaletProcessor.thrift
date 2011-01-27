@@ -18,7 +18,8 @@ struct RemoteInternalResponse {
     3: i32 httpStatus,
     4: list<string> data,
     5: list<string> errors,
-    6: map<string, string> attributes
+    6: map<string, string> attributes,
+    7: map<string, string> headers
 }
 
 service RemoteYaletProcessor {

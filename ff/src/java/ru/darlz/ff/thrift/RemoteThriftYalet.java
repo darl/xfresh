@@ -12,9 +12,9 @@ import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
 import org.springframework.beans.factory.annotation.Required;
 import ru.darlz.ff.RemoteYalet;
-import ru.darlz.ff.dataWriter;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,27 +40,40 @@ public class RemoteThriftYalet extends RemoteYalet {
         }
 
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Referer", req.getHeader("Referer"));
-        headers.put("User-Agent", req.getHeader("User-Agent"));
+        if (req.getHeader("Referer") != null)
+            headers.put("Referer", req.getHeader("Referer"));
+        if (req.getHeader("User-Agent") != null)
+            headers.put("User-Agent", req.getHeader("User-Agent"));
+
+        String realPath = req.getRealPath();
+        boolean needTransform = req.needTransform();
+        Map<String, String> cookies = req.getCookies();
+        Map<String, List<String>> params = req.getAllParameters();
+        String requestUrl = req.getRequestURL();
+        String queryString = req.getQueryString();
+        String remoteAddr = req.getRemoteAddr();
+        Long userId = req.getUserId();
 
         RemoteInternalRequest rReq = new RemoteInternalRequest(
-                req.getRealPath(),
-                req.needTransform(),
-                req.getCookies(),
-                req.getAllParameters(),
-                req.getRequestURL(),
-                req.getQueryString(),
-                req.getRemoteAddr(),
+                realPath,
+                needTransform,
+                cookies,
+                params,
+                requestUrl,
+                queryString,
+                remoteAddr,
                 headers,
-                req.getUserId()
-        );
+                userId == null ? 0 : userId);
+
+
         RemoteInternalResponse rRes = new RemoteInternalResponse(
                 res.getRedir(),
                 null, //cookies
                 0,    //status
                 null, //data
                 null, //errors
-                null  //attributes
+                null,  //attributes
+                null  //headers
         );
 
         //All hooked up, start using the service
@@ -83,7 +96,7 @@ public class RemoteThriftYalet extends RemoteYalet {
             res.setHttpStatus(rRes.httpStatus);
         if (rRes.isSetData())
             for (String data : rRes.data)
-                res.add(new dataWriter(data));
+                res.add(data);
         if (rRes.isSetErrors())
             for (String err : rRes.errors)
                 res.addError(new ErrorInfo(err));
