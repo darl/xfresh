@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+        "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+    <!--Spring helpers-->
+    <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
+
+
+    <bean class="ru.darlz.ff.thrift.ThriftServerStarter">
+        <property name="port" value="33002"/>
+    </bean>
+
+    <bean id="handler" class="ru.darlz.ff.thrift.Handler"/>
+
+
+    <bean id="helloWorldYalet" class="ru.darlz.ff.HelloWorldYalet"/>
+    <!--<bean id="doNothingYalet" class="net.sf.xfresh.server.DoNothingYalet"/>-->
+
+
+</beans>
