@@ -18,11 +18,16 @@
             <exclude name="junit*.jar"/>
         </fileset>
 
+        <fileset id="ff-lib" dir="lib">
+            <include name="**/*.jar"/>
+        </fileset>
+
         <fileset id="xfresh-core" dir="${core.dir}/build/dist" includes="*.jar"/>
 
         <path id="project.classpath">
             <fileset refid="core-lib"/>
             <fileset refid="xfresh-core"/>
+            <fileset refid="ff-lib"/>
         </path>
 
         <mkdir dir="${build.dir}"/>
@@ -48,7 +53,6 @@
                 includes="**/*.class"
                 />
     </target>
-
 
     <target name="copy-view" depends="init">
         <copy todir="${build.view.dir}" overwrite="true">

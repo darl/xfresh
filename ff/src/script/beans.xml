@@ -40,7 +40,7 @@
         <property name="encoding" value="utf-8"/>
     </bean>
 
-    <bean id="yaletSupport" class="ru.darlz.ff.MyYaletSupport">
+    <bean id="yaletSupport" class="net.sf.xfresh.ext.ExtYaletSupport">
         <property name="resourceBase" value="./web"/>
         <property name="authHandler">
             <!--<bean class="net.sf.xfresh.ext.AlwaysNoAuthHandler"/>-->
@@ -59,6 +59,13 @@
 
     <bean id="requestYalet" class="net.sf.xfresh.base.RequestYalet"/>
     <bean id="doNothingYalet" class="net.sf.xfresh.server.DoNothingYalet"/>
-    <bean id="fileUploadYalet" class="ru.darlz.ff.FileUploadYalet"/>
+
+    <!--remoteYalet example-->
+    <!--
+       <bean id="abcYalet" class="ru.darlz.ff.thrift.RemoteThriftYalet">
+           <property name="remoteName" value="abcYalet"/>
+
+       </bean>
+    -->
 
 </beans>
