@@ -8,6 +8,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
+import ru.darlz.ff.protobuf.RemoteProtobufYalet;
 import ru.darlz.ff.thrift.RemoteThriftYalet;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -74,9 +75,11 @@ public class RemoteYaletFilter extends ExtYaletFilter {
             yal.setRemoteName(rYaletName + YALET_ELEMENT);
             ((RemoteThriftYalet) yal).setHost(rYaletHost);
             ((RemoteThriftYalet) yal).setPort(Integer.parseInt(rYaletPort));
-
         } else if (rYaletType.equalsIgnoreCase(PROTOBUF)) {
-            //todo
+            yal = new RemoteProtobufYalet();
+            yal.setRemoteName(rYaletName + YALET_ELEMENT);
+            ((RemoteProtobufYalet) yal).setHost(rYaletHost);
+            ((RemoteProtobufYalet) yal).setPort(Integer.parseInt(rYaletPort));
         } else if (rYaletType.equalsIgnoreCase(RMI)) {
             //todo
         } else

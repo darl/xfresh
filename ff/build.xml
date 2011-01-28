@@ -62,9 +62,14 @@
 
     <target name="copy-config" depends="init">
         <copy todir="${build.dir}" overwrite="true">
-            <fileset dir="${src.dir}/script"/>
+            <fileset dir="${src.dir}/script">
+                <include name="*"/>
+                <exclude name="*.proto"/>
+                <exclude name="*.thrift"/>
+            </fileset>
         </copy>
         <chmod file="${build.dir}/start.sh" perm="+x"/>
+        <chmod file="${build.dir}/stop.sh" perm="+x"/>
     </target>
 
     <target name="copy-libs" depends="init">
