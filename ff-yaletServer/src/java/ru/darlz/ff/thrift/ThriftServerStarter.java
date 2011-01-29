@@ -28,7 +28,7 @@ public class ThriftServerStarter implements InitializingBean {
         final long st = System.currentTimeMillis();
 
         final TNonblockingServerSocket socket = new TNonblockingServerSocket(_port);
-        final RemoteYaletProcessor.Processor processor = new RemoteYaletProcessor.Processor(_handler);
+        final RemoteYaletProcessor.Processor processor = new RemoteYaletProcessor.Processor(thriftImpl);
         final TServer server = new THsHaServer(processor, socket,
                 new TFramedTransport.Factory(), new TCompactProtocol.Factory());
 
@@ -51,9 +51,9 @@ public class ThriftServerStarter implements InitializingBean {
 
     int _port;
 
-    public void setHandler(Handler _handler) {
-        this._handler = _handler;
+    public void setThriftImpl(ThriftYaletProcessorImpl _handler) {
+        this.thriftImpl = _handler;
     }
 
-    Handler _handler;
+    ThriftYaletProcessorImpl thriftImpl;
 }

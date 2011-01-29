@@ -6,12 +6,17 @@
     <!--Spring helpers-->
     <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
 
-
+    <!--thrift-->
     <bean class="ru.darlz.ff.thrift.ThriftServerStarter">
         <property name="port" value="33002"/>
     </bean>
+    <bean id="thriftImpl" class="ru.darlz.ff.thrift.ThriftYaletProcessorImpl"/>
 
-    <bean id="handler" class="ru.darlz.ff.thrift.Handler"/>
+    <!--protobuf-->
+    <bean class="ru.darlz.ff.protobuf.ProtobufServerStarter">
+        <property name="port" value="33003"/>
+    </bean>
+    <bean id="protobufImpl" class="ru.darlz.ff.protobuf.ProtobufYaletProcessorImpl"/>
 
 
     <bean id="helloWorldYalet" class="ru.darlz.ff.HelloWorldYalet"/>

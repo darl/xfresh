@@ -1,9 +1,10 @@
-package ru.darlz.ff.thrift;
+package ru.darlz.ff.protobuf;
 
+import com.google.protobuf.RpcController;
+import com.google.protobuf.ServiceException;
 import net.sf.xfresh.core.Yalet;
 import net.sf.xfresh.core.YaletResolvingException;
 import org.apache.log4j.Logger;
-import org.apache.thrift.TException;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -11,15 +12,17 @@ import org.springframework.context.ApplicationContextAware;
 /**
  * Created by IntelliJ IDEA.
  * User: darl
- * Date: 27.01.11
- * Time: 14:21
+ * Date: 29.01.11
+ * Time: 5:14
  */
-public class Handler implements RemoteYaletProcessor.Iface, ApplicationContextAware {
+public class ProtobufYaletProcessorImpl implements RemoteYaletProcessor.Processor.BlockingInterface, ApplicationContextAware {
     @Override
-    public RemoteInternalResponse process(String yalet, RemoteInternalRequest req, RemoteInternalResponse res) throws TException {
+    public RemoteYaletProcessor.RemoteInternalResponse process
+            (RpcController controller, RemoteYaletProcessor.RemoteInternalRequest request) throws ServiceException {
 
-        ThriftInternalRequest tReq = new ThriftInternalRequest(req);
-        ThriftInternalResponse tRes = new ThriftInternalResponse(res);
+        ProtobufInternalRequest _req = new ProtobufInternalRequest(request);
+        ProtobufInternalResponse _res = new ProtobufInternalResponse(RemoteYaletProcessor.RemoteInternalResponse.newBuilder());
+        String yalet = request.getYaletName();
 
         final Object bean = applicationContext.getBean(yalet);
         if (bean == null) {
@@ -31,10 +34,10 @@ public class Handler implements RemoteYaletProcessor.Iface, ApplicationContextAw
             throw new YaletResolvingException(yalet);
         }
 
-        log.info("Processing {" + yalet + "} yalet");
-        ((Yalet) bean).process(tReq, tRes);
+        log.info("Processing {" + yalet + "} yalet(ProtoBuf)");
+        ((Yalet) bean).process(_req, _res);
 
-        return res;
+        return _res.build();
     }
 
     @Override
