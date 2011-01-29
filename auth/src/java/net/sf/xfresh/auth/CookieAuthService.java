@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -90,5 +91,10 @@ public class CookieAuthService implements AuthService {
 
         log.info("bad cookie owner for " + req.getRemoteAddr() + " => {" + hash + "} user-id=" + cookie[0] + " hash=" + cookie[1]);
         return null;
+    }
+
+    @Override
+    public List<UserInfo> getUsers() {
+        return userService.getUsers();
     }
 }

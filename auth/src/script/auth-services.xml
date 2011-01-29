@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
- "http://www.springframework.org/dtd/spring-beans.dtd">
+        "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans default-autowire="byName">
 
@@ -16,5 +16,6 @@
     <bean id="addUserYalet" class="net.sf.xfresh.auth.yalet.AddUserYalet"/>
     <bean id="doAuthYalet" class="net.sf.xfresh.auth.yalet.DoAuthYalet"/>
     <bean id="userInfoYalet" class="net.sf.xfresh.auth.yalet.UserInfoYalet"/>
+    <bean id="usersYalet" class="net.sf.xfresh.auth.yalet.UsersYalet"/>
 
 </beans>

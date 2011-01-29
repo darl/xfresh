@@ -1,5 +1,7 @@
 package net.sf.xfresh.auth;
 
+import java.util.List;
+
 /**
  * Author: Olga Bolshakova (obolshakova@yandex-team.ru)
  * Date: 02.01.11 17:26
@@ -16,4 +18,5 @@ public interface UserService {
 
     UserInfo getUser(String login);
 
+    List<UserInfo> getUsers();
 }

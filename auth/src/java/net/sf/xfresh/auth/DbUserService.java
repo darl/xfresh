@@ -98,4 +98,14 @@ public class DbUserService implements UserService {
             );
         }
     };
+
+    @Override
+    public List<UserInfo> getUsers() {
+        final List<UserInfo> users = jdbcTemplate.query(
+                "select user_id, login, fio, passwd_hash, passwd_add from auth_user", USER_INFO_MAPPER);
+        if (users.isEmpty()) {
+            return null;
+        }
+        return users;
+    }
 }
