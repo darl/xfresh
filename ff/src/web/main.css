@@ -1,0 +1,98 @@
+#login {
+    position: absolute;
+    right: 4px;
+    top: 3px;
+    text-align:right;
+}
+
+#header {
+    width:100%;
+    border-bottom: solid 1px #eeeeee;
+}
+
+#links {
+    width:100%;
+    border-bottom: solid 1px #eeeeee;
+
+    text-align:center;
+    color:#bbbbbb;
+    font-size: 14px;
+}
+
+.blank {
+    height: 30px;
+}
+
+#inner {
+    display:table;
+    border: solid 1px #eeeeee;
+}
+
+.story {
+    width: 500px;
+    border: solid 1px #eeeeee;
+    background: #fafafa;
+    text-align:left;
+}
+
+a:hover {
+    color:#999999;
+}
+
+a {
+    text-decoration:none;
+    color:#bbbbbb;
+}
+
+a.likeit:hover {
+    color:#597da1;
+}
+
+a.likeit {
+    text-decoration:none;
+    color:#799dc1;
+}
+
+.button:hover {
+border-color:#999 #ddd #ddd #999;
+border-style:solid;
+border-width:1px;
+background:#dddddd;
+}
+
+.button:focus {
+background:#aaaaaa;
+border-color:#ddd #333 #333 #ddd;
+border-style:solid;
+border-width:1px;
+}
+
+.button {
+background:#eeeeee;
+border-color:#ddd #333 #333 #ddd;
+border-style:solid;
+border-width:1px;
+}
+
+body {
+    font-family: tahoma, arial, verdana, sans-serif, Lucida Sans;
+    margin: 0px;
+    padding: 0px;
+    font-size: 12px;
+    background: #fff;
+}
+
+.descr {
+    font-size: 13px;
+    color: #555;
+}
+
+.body {
+    font-size: 12px;
+    color: #333;
+}
+
+.buttomline {
+    font-size: 11px;
+    color: #777;
+}

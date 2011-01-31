@@ -103,6 +103,9 @@ public class RemoteThriftYalet extends RemoteYalet {
         if (rRes.isSetAttributes())
             for (Map.Entry<String, String> attrib : rRes.attributes.entrySet())
                 res.putAttribute(attrib.getKey(), attrib.getValue());
+        if (rRes.isSetHeaders())
+            for (Map.Entry<String, String> header : rRes.headers.entrySet())
+                res.putAttribute(header.getKey(), header.getValue());
 
         transport.close();
     }

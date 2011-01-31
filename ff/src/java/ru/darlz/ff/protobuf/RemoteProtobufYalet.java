@@ -29,6 +29,7 @@ public class RemoteProtobufYalet extends RemoteYalet {
     }
 
     private RemoteYaletProcessor.ParametersEntry paramsValue(String name, List<String> l, RemoteYaletProcessor.ParametersEntry.Builder b) {
+
         b.setKey(name);
         b.addAllValues(l);
         return b.build();
@@ -44,35 +45,46 @@ public class RemoteProtobufYalet extends RemoteYalet {
         List<RemoteYaletProcessor.ParametersEntry> params = new LinkedList<RemoteYaletProcessor.ParametersEntry>();
         List<RemoteYaletProcessor.MapEntry> headers = new LinkedList<RemoteYaletProcessor.MapEntry>();
 
-        RemoteYaletProcessor.MapEntry.Builder mapEntryBuilder = RemoteYaletProcessor.MapEntry.newBuilder();
-        RemoteYaletProcessor.ParametersEntry.Builder paramEntryBuilder = RemoteYaletProcessor.ParametersEntry.newBuilder();
+        RemoteYaletProcessor.MapEntry.Builder mapEntryBuilder;
 
         for (Map.Entry<String, String> e : req.getCookies().entrySet()) {
+            mapEntryBuilder = RemoteYaletProcessor.MapEntry.newBuilder();
             mapEntryBuilder.setKey(e.getKey());
             mapEntryBuilder.setValue(e.getValue());
             cookieList.add(mapEntryBuilder.build());
         }
 
         for (Map.Entry<String, List<String>> e : req.getAllParameters().entrySet()) {
-            params.add(paramsValue(e.getKey(), e.getValue(), paramEntryBuilder));
+            params.add(paramsValue(e.getKey(), e.getValue(), RemoteYaletProcessor.ParametersEntry.newBuilder()));
         }
 
-        headers.add(mapEntryBuilder.setKey("Referer").setValue(req.getHeader("Referer")).build());
-        headers.add(mapEntryBuilder.setKey("User-Agent").setValue(req.getHeader("User-Agent")).build());
+        if (req.getHeader("Referer") != null)
+            headers.add(RemoteYaletProcessor.MapEntry.newBuilder()
+                    .setKey("Referer").setValue(req.getHeader("Referer")).build());
+        if (req.getHeader("User-Agent") != null)
+            headers.add(RemoteYaletProcessor.MapEntry.newBuilder()
+                    .setKey("User-Agent").setValue(req.getHeader("User-Agent")).build());
 
-        _req = RemoteYaletProcessor.RemoteInternalRequest.newBuilder()
-                .setRealPath(req.getRealPath())
-                .setNeedTransform(req.needTransform())
-                .addAllCookies(cookieList)
-                .addAllParameters(params)
-                .setRequestUrl(req.getRequestURL())
-                .setQueryString(req.getQueryString())
-                .setRemoteAddr(req.getRemoteAddr())
-                .addAllHeaders(headers)
-                .setUserId(req.getUserId() != null ? req.getUserId() : 0)
-                .setYaletName(_yaletName)            //most important
-                .build();
 
+        RemoteYaletProcessor.RemoteInternalRequest.Builder _reqBuilder = RemoteYaletProcessor.RemoteInternalRequest.newBuilder();
+
+        _reqBuilder.setYaletName(_yaletName);
+        if (req.getRealPath() != null)
+            _reqBuilder.setRealPath(req.getRealPath());
+        _reqBuilder.setNeedTransform(req.needTransform());
+        _reqBuilder.addAllCookies(cookieList);
+        _reqBuilder.addAllParameters(params);
+        if (req.getRequestURL() != null)
+            _reqBuilder.setRequestUrl(req.getRequestURL());
+        if (req.getQueryString() != null)
+            _reqBuilder.setQueryString(req.getQueryString());
+        if (req.getRemoteAddr() != null)
+            _reqBuilder.setRemoteAddr(req.getRemoteAddr());
+        _reqBuilder.addAllHeaders(headers);
+        _reqBuilder.setUserId(req.getUserId() != null ? req.getUserId() : 0);
+
+
+        _req = _reqBuilder.build();
 
         //init connection
         RpcConnectionFactory clientConnectionFactory =
@@ -114,6 +126,9 @@ public class RemoteProtobufYalet extends RemoteYalet {
         if (_res.getAttributesCount() > 0)
             for (RemoteYaletProcessor.MapEntry e : _res.getAttributesList())
                 res.putAttribute(e.getKey(), e.getValue());
+        if (_res.getHeadersCount() > 0)
+            for (RemoteYaletProcessor.MapEntry e : _res.getHeadersList())
+                res.setHeader(e.getKey(), e.getValue());
     }
 
 

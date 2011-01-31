@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="index.xsl"?>
+<page xmlns:x="http://xfresh.sf.net/ext">
+    <x:auth/>
+
+    <x:http url="http://localhost:33001/users"/>
+
+    <page>
+        <x:js>
+            var i = request.getIntParameter('page', 0);
+            out = i;
+        </x:js>
+    </page>
+
+    <x:ryalet id="liked" type="thrift" host="localhost" port="33002"/>
+</page>
+

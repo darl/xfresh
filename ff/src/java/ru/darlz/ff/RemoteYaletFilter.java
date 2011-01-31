@@ -64,7 +64,7 @@ public class RemoteYaletFilter extends ExtYaletFilter {
         if (isRemoteYaletBlock(uri, localName)) {
             processYalet();
         } else {
-            super.endElement(uri, localName, qName);    //To change body of overridden methods use File | Settings | File Templates.
+            super.endElement(uri, localName, qName);
         }
     }
 
@@ -88,7 +88,7 @@ public class RemoteYaletFilter extends ExtYaletFilter {
         if (yal == null) return;
 
         final long startTime = System.currentTimeMillis();
-        yal.process(request, response);
+        yal.process(wrap(request, userId), response);
         final long processingTime = System.currentTimeMillis() - startTime;
 
         XmlUtil.start(getContentHandler(), DATA_ELEMENT, ID_ATTRIBUTE, rYaletName, PROCESSING_TIME_ATTRIBUTE, Long.toString(processingTime));

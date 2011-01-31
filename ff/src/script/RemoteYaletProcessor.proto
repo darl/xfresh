@@ -32,6 +32,7 @@ message RemoteInternalResponse {
     repeated string data = 4;
     repeated string errors = 5;
     repeated MapEntry attributes = 6;
+    repeated MapEntry headers = 7;
 }
 
 service Processor {

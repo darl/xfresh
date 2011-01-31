@@ -19,8 +19,26 @@
     <bean id="protobufImpl" class="ru.darlz.ff.protobuf.ProtobufYaletProcessorImpl"/>
 
 
-    <bean id="helloWorldYalet" class="ru.darlz.ff.HelloWorldYalet"/>
     <!--<bean id="doNothingYalet" class="net.sf.xfresh.server.DoNothingYalet"/>-->
+    <bean id="goBackYalet" class="ru.darlz.ff.GoBackYalet"/>
+    <bean id="listYalet" class="ru.darlz.ff.ListYalet"/>
+    <bean id="likedYalet" class="ru.darlz.ff.LikedYalet"/>
+    <bean id="fromYalet" class="ru.darlz.ff.FromYalet"/>
+    <bean id="addStoryYalet" class="ru.darlz.ff.AddStoryYalet"/>
+    <bean id="likeItYalet" class="ru.darlz.ff.LikeItYalet"/>
 
+
+    <!--DB conf-->
+    <bean id="dataSource" destroy-method="close" class="org.apache.commons.dbcp.BasicDataSource" lazy-init="false">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/ff?useUnicode=true&amp;characterEncoding=utf8"/>
+        <property name="username" value="xfresh"/>
+        <property name="password" value="xfresh"/>
+        <property name="validationQuery" value="select 1"/>
+    </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate" lazy-init="false">
+        <constructor-arg ref="dataSource"/>
+    </bean>
 
 </beans>

@@ -7,13 +7,15 @@ import net.sf.xfresh.core.Yalet;
 /**
  * Created by IntelliJ IDEA.
  * User: darl
- * Date: 27.01.11
- * Time: 15:37
+ * Date: 30.01.11
+ * Time: 0:48
  */
-public class HelloWorldYalet implements Yalet {
+public class GoBackYalet implements Yalet {
     @Override
     public void process(InternalRequest req, InternalResponse res) {
-        res.add("Hello, World!");
-        res.add(req.getHeader("User-Agent"));
+        if (req.getHeader("Referer") != null)
+            res.redirectTo(req.getHeader("Referer"));
+        else
+            res.redirectTo("/");
     }
 }

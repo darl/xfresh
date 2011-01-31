@@ -1853,6 +1853,23 @@ public final class RemoteYaletProcessor {
             return attributes_.get(index);
         }
 
+        // repeated .ru.darlz.ff.protobuf.MapEntry headers = 7;
+        public static final int HEADERS_FIELD_NUMBER = 7;
+        private java.util.List<ru.darlz.ff.protobuf.RemoteYaletProcessor.MapEntry> headers_ =
+                java.util.Collections.emptyList();
+
+        public java.util.List<ru.darlz.ff.protobuf.RemoteYaletProcessor.MapEntry> getHeadersList() {
+            return headers_;
+        }
+
+        public int getHeadersCount() {
+            return headers_.size();
+        }
+
+        public ru.darlz.ff.protobuf.RemoteYaletProcessor.MapEntry getHeaders(int index) {
+            return headers_.get(index);
+        }
+
         private void initFields() {
         }
 
@@ -1861,6 +1878,9 @@ public final class RemoteYaletProcessor {
                 if (!element.isInitialized()) return false;
             }
             for (ru.darlz.ff.protobuf.RemoteYaletProcessor.MapEntry element : getAttributesList()) {
+                if (!element.isInitialized()) return false;
+            }
+            for (ru.darlz.ff.protobuf.RemoteYaletProcessor.MapEntry element : getHeadersList()) {
                 if (!element.isInitialized()) return false;
             }
             return true;
@@ -1886,6 +1906,9 @@ public final class RemoteYaletProcessor {
             }
             for (ru.darlz.ff.protobuf.RemoteYaletProcessor.MapEntry element : getAttributesList()) {
                 output.writeMessage(6, element);
+            }
+            for (ru.darlz.ff.protobuf.RemoteYaletProcessor.MapEntry element : getHeadersList()) {
+                output.writeMessage(7, element);
             }
             getUnknownFields().writeTo(output);
         }
@@ -1930,6 +1953,10 @@ public final class RemoteYaletProcessor {
             for (ru.darlz.ff.protobuf.RemoteYaletProcessor.MapEntry element : getAttributesList()) {
                 size += com.google.protobuf.CodedOutputStream
                         .computeMessageSize(6, element);
+            }
+            for (ru.darlz.ff.protobuf.RemoteYaletProcessor.MapEntry element : getHeadersList()) {
+                size += com.google.protobuf.CodedOutputStream
+                        .computeMessageSize(7, element);
             }
             size += getUnknownFields().getSerializedSize();
             memoizedSerializedSize = size;
@@ -2109,6 +2136,10 @@ public final class RemoteYaletProcessor {
                     result.attributes_ =
                             java.util.Collections.unmodifiableList(result.attributes_);
                 }
+                if (result.headers_ != java.util.Collections.EMPTY_LIST) {
+                    result.headers_ =
+                            java.util.Collections.unmodifiableList(result.headers_);
+                }
                 ru.darlz.ff.protobuf.RemoteYaletProcessor.RemoteInternalResponse returnMe = result;
                 result = null;
                 return returnMe;
@@ -2155,6 +2186,12 @@ public final class RemoteYaletProcessor {
                         result.attributes_ = new java.util.ArrayList<ru.darlz.ff.protobuf.RemoteYaletProcessor.MapEntry>();
                     }
                     result.attributes_.addAll(other.attributes_);
+                }
+                if (!other.headers_.isEmpty()) {
+                    if (result.headers_.isEmpty()) {
+                        result.headers_ = new java.util.ArrayList<ru.darlz.ff.protobuf.RemoteYaletProcessor.MapEntry>();
+                    }
+                    result.headers_.addAll(other.headers_);
                 }
                 this.mergeUnknownFields(other.getUnknownFields());
                 return this;
@@ -2207,6 +2244,12 @@ public final class RemoteYaletProcessor {
                             ru.darlz.ff.protobuf.RemoteYaletProcessor.MapEntry.Builder subBuilder = ru.darlz.ff.protobuf.RemoteYaletProcessor.MapEntry.newBuilder();
                             input.readMessage(subBuilder, extensionRegistry);
                             addAttributes(subBuilder.buildPartial());
+                            break;
+                        }
+                        case 58: {
+                            ru.darlz.ff.protobuf.RemoteYaletProcessor.MapEntry.Builder subBuilder = ru.darlz.ff.protobuf.RemoteYaletProcessor.MapEntry.newBuilder();
+                            input.readMessage(subBuilder, extensionRegistry);
+                            addHeaders(subBuilder.buildPartial());
                             break;
                         }
                     }
@@ -2466,6 +2509,65 @@ public final class RemoteYaletProcessor {
 
             public Builder clearAttributes() {
                 result.attributes_ = java.util.Collections.emptyList();
+                return this;
+            }
+
+            // repeated .ru.darlz.ff.protobuf.MapEntry headers = 7;
+            public java.util.List<ru.darlz.ff.protobuf.RemoteYaletProcessor.MapEntry> getHeadersList() {
+                return java.util.Collections.unmodifiableList(result.headers_);
+            }
+
+            public int getHeadersCount() {
+                return result.getHeadersCount();
+            }
+
+            public ru.darlz.ff.protobuf.RemoteYaletProcessor.MapEntry getHeaders(int index) {
+                return result.getHeaders(index);
+            }
+
+            public Builder setHeaders(int index, ru.darlz.ff.protobuf.RemoteYaletProcessor.MapEntry value) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                result.headers_.set(index, value);
+                return this;
+            }
+
+            public Builder setHeaders(int index, ru.darlz.ff.protobuf.RemoteYaletProcessor.MapEntry.Builder builderForValue) {
+                result.headers_.set(index, builderForValue.build());
+                return this;
+            }
+
+            public Builder addHeaders(ru.darlz.ff.protobuf.RemoteYaletProcessor.MapEntry value) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                if (result.headers_.isEmpty()) {
+                    result.headers_ = new java.util.ArrayList<ru.darlz.ff.protobuf.RemoteYaletProcessor.MapEntry>();
+                }
+                result.headers_.add(value);
+                return this;
+            }
+
+            public Builder addHeaders(ru.darlz.ff.protobuf.RemoteYaletProcessor.MapEntry.Builder builderForValue) {
+                if (result.headers_.isEmpty()) {
+                    result.headers_ = new java.util.ArrayList<ru.darlz.ff.protobuf.RemoteYaletProcessor.MapEntry>();
+                }
+                result.headers_.add(builderForValue.build());
+                return this;
+            }
+
+            public Builder addAllHeaders(
+                    java.lang.Iterable<? extends ru.darlz.ff.protobuf.RemoteYaletProcessor.MapEntry> values) {
+                if (result.headers_.isEmpty()) {
+                    result.headers_ = new java.util.ArrayList<ru.darlz.ff.protobuf.RemoteYaletProcessor.MapEntry>();
+                }
+                super.addAll(values, result.headers_);
+                return this;
+            }
+
+            public Builder clearHeaders() {
+                result.headers_ = java.util.Collections.emptyList();
                 return this;
             }
 
@@ -2745,15 +2847,16 @@ public final class RemoteYaletProcessor {
                         "equest_url\030\005 \002(\t\022\024\n\014query_string\030\006 \001(\t\022\023" +
                         "\n\013remote_addr\030\007 \001(\t\022/\n\007headers\030\010 \003(\0132\036.r",
                 "u.darlz.ff.protobuf.MapEntry\022\017\n\007user_id\030" +
-                        "\t \002(\003\022\022\n\nyalet_name\030\n \002(\t\"\305\001\n\026RemoteInte" +
+                        "\t \002(\003\022\022\n\nyalet_name\030\n \002(\t\"\366\001\n\026RemoteInte" +
                         "rnalResponse\022\023\n\013redirect_to\030\001 \001(\t\022/\n\007coo" +
                         "kies\030\002 \003(\0132\036.ru.darlz.ff.protobuf.MapEnt" +
                         "ry\022\023\n\013http_status\030\003 \001(\005\022\014\n\004data\030\004 \003(\t\022\016\n" +
                         "\006errors\030\005 \003(\t\0222\n\nattributes\030\006 \003(\0132\036.ru.d" +
-                        "arlz.ff.protobuf.MapEntry2q\n\tProcessor\022d" +
-                        "\n\007process\022+.ru.darlz.ff.protobuf.RemoteI" +
-                        "nternalRequest\032,.ru.darlz.ff.protobuf.Re" +
-                        "moteInternalResponseB\003\210\001\001"
+                        "arlz.ff.protobuf.MapEntry\022/\n\007headers\030\007 \003" +
+                        "(\0132\036.ru.darlz.ff.protobuf.MapEntry2q\n\tPr" +
+                        "ocessor\022d\n\007process\022+.ru.darlz.ff.protobu" +
+                        "f.RemoteInternalRequest\032,.ru.darlz.ff.pr",
+                "otobuf.RemoteInternalResponseB\003\210\001\001"
         };
         com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
                 new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2789,7 +2892,7 @@ public final class RemoteYaletProcessor {
                         internal_static_ru_darlz_ff_protobuf_RemoteInternalResponse_fieldAccessorTable = new
                                 com.google.protobuf.GeneratedMessage.FieldAccessorTable(
                                 internal_static_ru_darlz_ff_protobuf_RemoteInternalResponse_descriptor,
-                                new java.lang.String[]{"RedirectTo", "Cookies", "HttpStatus", "Data", "Errors", "Attributes",},
+                                new java.lang.String[]{"RedirectTo", "Cookies", "HttpStatus", "Data", "Errors", "Attributes", "Headers",},
                                 ru.darlz.ff.protobuf.RemoteYaletProcessor.RemoteInternalResponse.class,
                                 ru.darlz.ff.protobuf.RemoteYaletProcessor.RemoteInternalResponse.Builder.class);
                         return null;
