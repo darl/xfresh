@@ -18,6 +18,12 @@
     </bean>
     <bean id="protobufImpl" class="ru.darlz.ff.protobuf.ProtobufYaletProcessorImpl"/>
 
+    <!--service-->
+    <bean class="ru.darlz.ff.service.ServiceStarter">
+        <property name="thriftPort" value="33004"/>
+        <property name="protobufPort" value="33005"/>
+    </bean>
+    <bean id="serviceImpl" class="ru.darlz.ff.service.ServiceImpl"/>
 
     <!--<bean id="doNothingYalet" class="net.sf.xfresh.server.DoNothingYalet"/>-->
     <bean id="goBackYalet" class="ru.darlz.ff.GoBackYalet"/>

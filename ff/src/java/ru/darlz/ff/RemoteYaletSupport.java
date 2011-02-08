@@ -1,8 +1,8 @@
 package ru.darlz.ff;
 
-import net.sf.xfresh.core.DefaultYaletSupport;
 import net.sf.xfresh.core.InternalRequest;
 import net.sf.xfresh.core.InternalResponse;
+import net.sf.xfresh.ext.ExtYaletSupport;
 import org.springframework.beans.factory.annotation.Required;
 import org.xml.sax.XMLFilter;
 
@@ -12,17 +12,30 @@ import org.xml.sax.XMLFilter;
  * Date: 27.01.11
  * Time: 21:14
  */
-public class RemoteYaletSupport extends DefaultYaletSupport {
+public class RemoteYaletSupport extends ExtYaletSupport {
 
-    private String resourceBase;
-
-    @Required
-    public void setResourceBase(final String resourceBase) {
-        this.resourceBase = resourceBase;
-    }
+    private String serviceHost;
+    private int thriftPort;
+    private int protobufPort;
 
     @Override
     public XMLFilter createFilter(final InternalRequest request, final InternalResponse response) {
-        return new RemoteYaletFilter(singleYaletProcessor, authHandler, request, response, resourceBase);
+        return new RemoteYaletFilter(singleYaletProcessor, authHandler, request, response, resourceBase, saxGenerator,
+                serviceHost, thriftPort, protobufPort);
+    }
+
+    @Required
+    public void setServiceHost(String serviceHost) {
+        this.serviceHost = serviceHost;
+    }
+
+    @Required
+    public void setThriftPort(int thriftPort) {
+        this.thriftPort = thriftPort;
+    }
+
+    @Required
+    public void setProtobufPort(int protobufPort) {
+        this.protobufPort = protobufPort;
     }
 }

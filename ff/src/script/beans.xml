@@ -50,6 +50,10 @@
                 <property name="userIdXpath" value="data/user-info/uid/text()"/>
             </bean>
         </property>
+
+        <property name="serviceHost" value="localhost"/>
+        <property name="thriftPort" value="33004"/>
+        <property name="protobufPort" value="33005"/>
     </bean>
 
     <bean id="yaletResolver" class="net.sf.xfresh.core.SpringYaletResolver"/>

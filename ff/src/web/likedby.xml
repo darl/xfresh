@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="likedby.xsl"?>
+<page xmlns:x="http://xfresh.sf.net/ext">
+    <x:auth/>
+
+    <x:http url="http://localhost:33001/users"/>
+
+
+    <x:js>
+        var storyId = request.getIntParameter("story", -1);
+        var myId = request.getUserId();
+        if(myId == null) myId = -1;
+        var story = thriftService.getStory(storyId, myId);
+        var likedBy = protobufService.likedBy(storyId);
+
+        response.add(story);
+        response.add(likedBy);
+    </x:js>
+
+</page>
+

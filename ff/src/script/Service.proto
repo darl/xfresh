@@ -1,0 +1,58 @@
+package ru.darlz.ff.service;
+
+option java_outer_classname = "ProtobufService";
+option java_generic_services = true;
+
+message Story {
+    required int32 story_id = 1;
+    required int64 author_id = 2;
+    required string description = 3;
+    required string body = 4;
+    required string date = 5;
+    required int32 likedBy = 6;
+    required bool liked = 7;
+}
+
+message AddStoryRequest {
+    required int64 my_id = 1;
+    required string description = 2;
+    required string body = 3;
+}
+
+message StoryRequest {
+    required int64 user_id = 1;
+    required bool best = 2;
+    required int32 page = 3;
+    required int64 my_id = 4;
+}
+
+message LikeRequest {
+    required int64 my_id = 1;
+    required int32 story_id = 2;
+}
+
+message OneStoryRequest {
+    required int32 story_id = 1;
+    required int64 my_id = 2;
+}
+
+message LikedRequest {
+    required int32 story_id = 1;
+}
+
+message Response {
+    repeated Story list = 1;
+}
+
+message LikedResponse {
+    repeated int64 user_id = 1;
+}
+
+service Service {
+    rpc addStory(AddStoryRequest) returns(Response);
+    rpc getStories(StoryRequest) returns(Response);
+    rpc getLiked(StoryRequest) returns(Response);
+    rpc likeIt(LikeRequest) returns(Response);
+    rpc getStory(OneStoryRequest) returns(Story);
+    rpc likedBy(LikedRequest) returns(LikedResponse);
+}

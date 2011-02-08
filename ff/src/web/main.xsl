@@ -48,17 +48,25 @@
                                     <xsl:value-of select="@liked"/>
                                 </xsl:variable>
 
-                                <a href="likeit.xml?story={$story}" class="likeit">
-                                    <img src="like.png"/>
-                                    <xsl:text> Мне </xsl:text>
-                                    <xsl:if test="$liked='true'">
-                                        <xsl:text>уже </xsl:text>
-                                    </xsl:if>
-                                    <xsl:text>нравится (</xsl:text>
-                                    <!--<xsl:value-of select="@liked"/>-->
-                                    <xsl:value-of select="@like-it"/>
-                                    <xsl:text>)</xsl:text>
-                                </a>
+                                <xsl:choose>
+                                    <xsl:when test="$liked='true'">
+                                        <a href="likedby.xml?story={$story}" class="likeit">
+                                            <img src="like2.png"/>
+                                            <xsl:text> Мне уже нравится (</xsl:text>
+                                            <xsl:value-of select="@like-it"/>
+                                            <xsl:text>)</xsl:text>
+                                        </a>
+
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <a href="likeit.xml?story={$story}" class="likeit">
+                                            <img src="like.png"/>
+                                            <xsl:text> Мне нравится (</xsl:text>
+                                            <xsl:value-of select="@like-it"/>
+                                            <xsl:text>)</xsl:text>
+                                        </a>
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </td>
                             <td style="text-align: right">
                                 <xsl:variable name="author-id">
